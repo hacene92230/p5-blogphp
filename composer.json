@@ -1,0 +1,22 @@
+{
+    "name": "cds/cds",
+    "description": "",
+    "authors": [
+        {
+            "name": "hacene sahraoui",
+            "email": "hacenedu92@live.fr"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App",
+            "System\\": "System"
+        }
+    },
+    "require": {
+        "php": ">=7.3",
+        "symfony/var-dumper": "^5.0",
+        "phpmailer/phpmailer": "^6.1",
+        "fzaninotto/faker": "^1.9"
+    }
+}
