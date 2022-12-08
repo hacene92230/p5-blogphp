@@ -1,9 +1,9 @@
 <?php
 namespace App\Controllers;
   use System\Coeur\Controllers\Controller;
-    class Accueil extends Controller
+    class Home extends Controller
     {
-        public function accueil()
+        public function home()
         {
 if(isset($_SESSION['utilisateurs']))
 	{
@@ -12,7 +12,7 @@ if(isset($_SESSION['utilisateurs']))
 		session_destroy();
 	}
 	}
-$this->view('accueil','accueil','Accueil');
+$this->view('home','home','Accueil');
         }
 
 public function contact()
