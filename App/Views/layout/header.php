@@ -53,8 +53,8 @@ if($_SESSION['utilisateurs']['uti_profil'] >= 2)
 else
 {
 	?>
-<a href="index.php?page=utilisateurs&action=authentification">Connexion</a>
-<a href="index.php?page=utilisateurs&action=inscription">Inscription</a>
+<a href="index.php?page=users&action=login">Connexion</a>
+<a href="index.php?page=users&action=register">Inscription</a>
 <?php
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
 namespace App\Controllers;
 use System\Coeur\Controllers\Controller;
-class Utilisateurs extends Controller
+class Users extends Controller
 {
-public function historique()
+public function history()
 	{
 $this->acces();
 $historique = $this->model("participation")->get_participation($_SESSION['utilisateurs']['uti_id']);
@@ -21,7 +21,7 @@ $participation->par_validitee = "non modifiable";
 $this->view("utilisateurs","historique","Mon historique",compact('historique'));
 	}
 
-	public function authentification()
+	public function login()
 	{
 		if (isset($_POST['authentification']))
 		{
@@ -43,7 +43,7 @@ exit;
 		}
 	}
 
-	public function Inscription()
+	public function register()
 	{
 		if (isset($_POST['uti_inscription'])) {
 			extract($_POST);
@@ -84,13 +84,13 @@ $user['uti_profil'] = 3;
 		}
 	}
 
-	public function deconnexion()
+	public function logout()
 	{
 		session_destroy();
 		header("location: index.php");
 	}
 
-	public function profil()
+	public function profile()
 	{
 $this->acces();
 $profil = $this->model();
