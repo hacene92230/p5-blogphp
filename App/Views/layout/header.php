@@ -14,9 +14,9 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <title><?= $title; ?> Culture du savoir</title>
-<link href="style.css" rel="stylesheet">
-    </head>
-<body>
+<link href="style.css" rel="stylesheet">  
+</head>
+<body onclick="myFunction()>
 <header>
 <p>Culture du savoir</p>
 <p><a href="index.php">Accueil</a></p>
@@ -33,20 +33,20 @@ if(isset($_SESSION['utilisateurs']))
 {
 ?>
 <li role="profil" class="nav nav-tabs" class="dropdown">
-<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <?= $_SESSION['utilisateurs']['uti_pseudo'] ?> <span class="caret"></span>
+<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <?= $_SESSION['utilisateurs']['firstname'] ?> <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-<li><a href="index.php?page=utilisateurs&action=profil">Mon profil</a></li>
+<li><a href="index.php?page=users&action=edit">Mon profil</a></li>
 <li><a href="index.php?page=messagerie&action=accueil">Messagerie</a></li>
 <li><a href="index.php?page=utilisateurs&action=historique">Mon historique</a></li>
 <?php
-if($_SESSION['utilisateurs']['uti_profil'] >= 2)
+if($_SESSION['utilisateurs']['profil'] == 1)
 { ?>
 <li><a href="index.php?page=admin&action=accueil">Administration</a></li>
 <?php
 }
 ?>
-<li><a href="index.php?page=utilisateurs&action=deconnexion">Se déconnecté</a></li>
+<li><a href="index.php?page=users&action=logout">Se déconnecté</a></li>
       </ul>
 <?php
 }

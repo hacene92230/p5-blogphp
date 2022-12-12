@@ -7,7 +7,7 @@ namespace App\Controllers;
         {
 if(isset($_SESSION['utilisateurs']))
 	{
-	if(empty($this->model("utilisateurs")->get($_SESSION['utilisateurs']['uti_id'])))
+	if(empty($this->model("users")->get($_SESSION['utilisateurs']['id'])))
 	{
 		session_destroy();
 	}
