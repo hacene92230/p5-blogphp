@@ -5,7 +5,7 @@
             <li> <a href='index.php?page=accueil&action=contact'>Nous contacter</a></li>
 </ul>
 <br />
-Copyright La criée terrestre, tous droits réservés. (2019-2020).
+Copyright HACENE SAHRAOUI, all rights reserved. (2022-2023).
     </footer>
 </body>
 </html>
