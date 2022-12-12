@@ -8,22 +8,15 @@ class Posts extends Controller
 {
 	public function new()
 	{
-
-
-		$this->view('posts', 'posts', 'Articles');
-	}
-
-	public function contact()
-	{
-		if (isset($_POST['contact'])) {
-			$msg_complet = '<p>Message reçu: <br />' . $_POST['con_contenu'] . '</p>' .
-				"<p>Message envoyé de la part de : " . $_POST['con_prenom'] . '</p>' .
-				'<p>Voici son email pour lui répondre: ' . $_POST['con_email'] . '</p>';
-			$this->mail($_POST['con_objet'], $msg_complet);
-			$_SESSION['message'][] = "votre message à bien été envoyé";
-			header("Location: index.php");
-			exit;
+		if (isset($_POST['new'])) {
+			extract($_POST);
+			$tabuser = array(
+				"title" => $title,
+				"content" => $content
+			);
+			var_dump($tabuser);
+			$this->model()->register($tabuser);
 		}
-		$this->view('accueil', 'contact', 'Contactez-nous culture du savoir');
+		$this->view('posts', 'new', 'Articles');
 	}
 }
