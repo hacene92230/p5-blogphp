@@ -57,15 +57,9 @@ class Users extends Controller
 
 	public function edit()
 	{
-		$profil = $this->model();
-		if (isset($_POST['supprimer'])) {
-			$profil->delete($_SESSION['utilisateurs']['id']);
-			$_SESSION['message'][] = "La suppression de votre compte à bien été prise en compte, celle-ci à un effet immédiat";
-			header("Location: index.php");
-			exit;
-		}
 		if (isset($_POST["edit"])) {
 			extract($_POST);
+			$profil = $this->model();
 			if (empty($_SESSION['utilisateurs']) and empty($firstname) or empty($email)) {
 				$_SESSION['message'][] = "Les champs: Nom, Pseudo et mot de passe ne peuvent être vide";
 				header("location: index.php?page=users&action=edit");
@@ -92,5 +86,16 @@ class Users extends Controller
 	{
 		session_destroy();
 		header("location: index.php");
+	}
+
+	public function delete()
+	{
+		$delete = $this->model();
+		if (isset($_POST['supprimer'])) {
+			$delete->delete($_SESSION['utilisateurs']['id']);
+			$_SESSION['message'][] = "La suppression de votre compte à bien été prise en compte, celle-ci à un effet immédiat";
+			header("Location: index.php");
+			exit;
+		}
 	}
 }

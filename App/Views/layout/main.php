@@ -16,7 +16,7 @@ unset($_SESSION['message']);
                         &times; </span> </button>
             </div>
         <?php
-    }
+    }   
     echo($content);
     ?>
     </main>

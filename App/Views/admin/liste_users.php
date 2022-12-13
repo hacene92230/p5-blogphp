@@ -4,8 +4,8 @@
 <table id="MonCollapse" class="collapse table table-bordered table-hover">
     <thead class="well thead-dark">
 	<tr>
-            	    <th>Email</th>
-                        <th>Prénom</th>
+            	    <th>Prénom</th>
+                        <th>Email</th>
 			<th>Supprimé</th>
 	        	<th>Bannir</th>
 			<th>Modifier</th>

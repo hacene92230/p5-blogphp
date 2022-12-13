@@ -1,6 +1,8 @@
 <h2>Mon profil</h2>
-            	    <form method="post" action="">
+            	    <form method="post" action="index.php?page=users&action=delete">
 					<input class="btn btn-success" type="submit" name="supprimer" value="Supprimer mon compte"/>
+</form>
+<form method="post" action="">
 					<div class='form-group'>
 	<label for='firstname'>Prénom</label>
 		<input id='firstname' name='firstname' type='text' size='50' value="<?= $firstname ?>" class='form-control' />
