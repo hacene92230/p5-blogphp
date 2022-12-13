@@ -55,4 +55,12 @@ class Posts extends Controller
 			$this->view('posts', 'edit', 'éditer un articles', compact("view_all"));
 		}
 	}
+
+	public function show()
+	{
+		if ($this->model()->get_id_post($_GET['post'])) {
+			$showtab = $this->model()->get_id_post($_GET['post'])[0];
+			$this->view('posts', 'show', $showtab["title"], compact("showtab"));
+		}
+	}
 }
