@@ -39,5 +39,20 @@ class Posts extends Controller
 	//allows you to edit an article
 	public function edit()
 	{
+		if (isset($_POST['view_all'])) {
+			//we retrieve the article that will have been chosen in the drop-down list then we display the view with the identifier in question.
+			$look = $this->model()->get_id_post($_POST['view_all']);
+			$this->view('posts', 'edit', 'éditer un articles', compact("look"));
+		} elseif (isset($_POST['edit'])) {
+			//we remove edit from the post table because otherwise the field would not exist because we will save the post table directly in the database.
+			unset($_POST['edit']);
+			$this->model()->update($_POST['id'], $_POST);
+			header("location: index.php?page=posts&action=edit");
+			$_SESSION['message'][] = "L'article à bien été mis à jours";
+		} else {
+			//we collect all the items. that we stoke in a table to make them visible.a
+			$view_all = $this->model()->get_all();
+			$this->view('posts', 'edit', 'éditer un articles', compact("view_all"));
+		}
 	}
 }
