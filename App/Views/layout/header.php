@@ -48,7 +48,7 @@ if(isset($_SESSION['utilisateurs']))
 <?php
 if($_SESSION['utilisateurs']['profil'] == 1)
 { ?>
-<li><a href="index.php?page=admin&action=accueil">Administration</a></li>
+<li><a href="index.php?page=admin&action=home">Administration</a></li>
 <?php
 }
 ?>
