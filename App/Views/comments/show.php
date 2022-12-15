@@ -5,7 +5,6 @@
             <th>Prénom</th>
             <th>Contenu du commentaire</th>
             <th>Statut</th>
-            <th>Valider</th>
             <th>Refuser</th>
         </tr>
     </thead>
@@ -15,10 +14,9 @@
             if ($show->approval == 1) {
                 $show->approval = "déjà approuvé";
                 echo "<tr>";
-                echo "<td>" . $show->id . "</td>";
+                echo "<td>" . $show->user_comment[0]['firstname'] . "</td>";
                 echo "<td>" . $show->content . "</td>";
                 echo "<td>" . $show->approval . "</td>";
-                echo "<td><a href='index.php?page=admin&action=comment_validate&comment=" . $show->id . "'>Valider le commentaire</a></td>";
                 echo "<td><a href='index.php?page=admin&action=comment_no_validate&comment=" . $show->id . "'>Refuser le commentaires</a></td>";
                 echo "</tr>";
             }
@@ -79,4 +77,4 @@
             }
         } ?>
     </tbody>
-    </table>
+</table>

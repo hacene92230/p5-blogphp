@@ -20,7 +20,10 @@ class Admin extends Controller
 	{
 		//We take all the comments to store them in a table.
 		$comments = $this->model("comments")->get_all();
-		$this->view('admin', 'show_comment', 'Liste des commentaires.', compact("comments"));
+		foreach ($comments as $valeur) {
+			$valeur->user_comment = $this->model("comments")->get_user_of_comment($valeur->user_id);
+		}
+		$this->view('comments', 'show', 'Liste des commentaires.', compact("comments"));
 	}
 
 	//allows you to validate comments that are not yet validated.
@@ -31,7 +34,6 @@ class Admin extends Controller
 		header("location: index.php?page=admin&action=home");
 		$_SESSION['message'][] = "Le commentaire à bien été valider";
 	}
-
 
 	public function comment_no_validate()
 	{
@@ -45,7 +47,6 @@ class Admin extends Controller
 	{
 		$this->model("comments")->delete($_GET["comment"]);
 		header("location: index.php?page=admin&action=home");
-
 		$_SESSION['message'][] = "Le commentaire à bien été supprimer";
 	}
 }
