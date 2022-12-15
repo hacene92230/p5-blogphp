@@ -43,8 +43,7 @@ if(isset($_SESSION['utilisateurs']))
         </a>
         <ul class="dropdown-menu">
 <li><a href="index.php?page=users&action=edit">Mon profil</a></li>
-<li><a href="index.php?page=messagerie&action=accueil">Messagerie</a></li>
-<li><a href="index.php?page=utilisateurs&action=historique">Mon historique</a></li>
+
 <?php
 if($_SESSION['utilisateurs']['profil'] == 1)
 { ?>

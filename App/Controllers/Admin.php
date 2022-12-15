@@ -49,4 +49,13 @@ class Admin extends Controller
 		header("location: index.php?page=admin&action=home");
 		$_SESSION['message'][] = "Le commentaire à bien été supprimer";
 	}
+
+	public function user_remove()
+	{
+		$this->model("comments")->delete_comment_of_user($_GET["user"]);
+		$this->model("users")->delete($_GET['user']);
+
+		header("location: index.php?page=admin&action=home");
+		$_SESSION['message'][] = "Le compte à bien été supprimer.";
+	}
 }

@@ -9,9 +9,9 @@ class Comments extends Model
 {
     protected static $table = 'comments';
     protected static $primary = 'id';
-    public function get_comment_approve(int $approval)
+    public function delete_comment_of_user(int $user)
     {
-        return $this->request('SELECT * FROM comments WHERE approval = :approval', [':approval' => $approval], PDO::FETCH_ASSOC);
+        return $this->request('delete FROM comments WHERE user_id = :user', [':user' => $user], PDO::FETCH_ASSOC);
     }
 
     public function get_user_of_comment($user_id)
