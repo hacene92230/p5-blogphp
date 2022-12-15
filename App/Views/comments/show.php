@@ -41,7 +41,7 @@
             if ($show->approval == 0) {
                 $show->approval = "En attente d'approbation.";
                 echo "<tr>";
-                echo "<td>" . $show->id . "</td>";
+                echo "<td>" . $show->user_comment[0]['firstname'] . "</td>";
                 echo "<td>" . $show->content . "</td>";
                 echo "<td>" . $show->approval . "</td>";
                 echo "<td><a href='index.php?page=admin&action=comment_validate&comment=" . $show->id . "'>Valider le commentaire</a></td>";
@@ -68,7 +68,7 @@
             if ($show->approval == 2) {
                 $show->approval = "Refuser.";
                 echo "<tr>";
-                echo "<td>" . $show->id . "</td>";
+                echo "<td>" . $show->user_comment[0]['firstname'] . "</td>";
                 echo "<td>" . $show->content . "</td>";
                 echo "<td>" . $show->approval . "</td>";
                 echo "<td><a href='index.php?page=admin&action=comment_validate&comment=" . $show->id . "'>Valider le commentaire</a></td>";
