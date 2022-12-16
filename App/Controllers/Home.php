@@ -23,6 +23,6 @@ class Home extends Controller
 			header("Location: index.php");
 			exit;
 		}
-		$this->view('accueil', 'contact', 'Contactez-nous culture du savoir');
+		$this->view('home', 'contact', 'Contactez-nous culture du savoir');
 	}
 }

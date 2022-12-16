@@ -56,27 +56,6 @@ class Controller
         echo (new View($directory, $view, $title, $args))->create();
     }
 
-    public function acces($admin = null)
-    {
-        if (isset($_SESSION['utilisateurs'])) {
-            extract($_SESSION['utilisateurs']);
-            $user_profil = $this->model('utilisateurs')->get_profil($uti_pseudo);
-            if ($user_profil[0]['pro_id'] != $uti_profil) {
-                $_SESSION['message'][] = "tu n'a pas le droit d'accédé à cet espace du site";
-                header("Location: index.php");
-                exit;
-            }
-            if ($admin == "true" and $uti_profil == $user_profil[0]['pro_id'] and $user_profil[0]['pro_id'] != 3) {
-                $_SESSION['message'][] = "tu n'a pas le droit d'accédé à cet espace du site";
-                header("Location: index.php");
-                exit;
-            }
-        } else {
-            $_SESSION['message'][] = "Tu doit être connecté affin d'accédé à cette partie du site";
-            header("Location: index.php?page=utilisateurs&action=authentification");
-            exit;
-        }
-    }
 
     public function mail($sujet, $msg)
     {
@@ -84,13 +63,13 @@ class Controller
         try {
             $mail->isSMTP();
             $mail->CharSet = 'utf-8';
-            $mail->Host       = 'SMTP.office365.com';
+            $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'hacenedu92@live.fr';
-            $mail->Password   = 'albatros';
+            $mail->Username   = 'hacenesahraoui.paris@gmail.com';
+            $mail->Password   = "pukadnxverivplbj";
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
-            $mail->setFrom('hacenedu92@live.fr', 'Contact culture du savoir');
+            $mail->Port       = 25;
+            $mail->setFrom('hacenesahraoui.paris@gmail.com', 'Contact culture du savoir');
             $mail->addAddress('hacenesahraoui.paris@gmail.com');
             $mail->isHTML(true);
             $mail->Subject = $sujet;

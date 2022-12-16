@@ -23,7 +23,7 @@ class Admin extends Controller
 		foreach ($comments as $valeur) {
 			$valeur->user_comment = $this->model("comments")->get_user_of_comment($valeur->user_id);
 		}
-		$this->view('comments', 'show', 'Liste des commentaires.', compact("comments"));
+		$this->view('comments', "management", 'Liste des commentaires.', compact("comments"));
 	}
 
 	//allows you to validate comments that are not yet validated.
