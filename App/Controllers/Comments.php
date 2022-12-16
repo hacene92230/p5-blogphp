@@ -21,11 +21,4 @@ class Comments extends Controller
             $_SESSION["message"][] = "Votre commentaire à bien été pris en compte, veuillez attendre ça validation";
         }
     }
-
-    //Displays all comments related to an article.
-    public function show()
-    {
-        $comment = $this->model()->get_comment_approve(0);
-        var_dump($comment);
-    }
 }

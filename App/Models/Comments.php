@@ -18,4 +18,9 @@ class Comments extends Model
     {
         return $this->request('SELECT firstname FROM users, comments WHERE comments.user_id = :user_id', [':user_id' => $user_id], PDO::FETCH_ASSOC);
     }
+
+    public function get_comment_approve_by_post($post_id)
+    {
+        return $this->request('SELECT *FROM comments WHERE approval = 1 and posts_id = :post_id', [':post_id' => $post_id], PDO::FETCH_ASSOC);
+    }
 }

@@ -56,11 +56,19 @@ class Posts extends Controller
 		}
 	}
 
+	//Displays all comments related to an article.
+	public function show_comments()
+	{
+		return $this->model("comments")->get_comment_approve_by_post(1);
+	}
+
+	//Displays the article with the parameter passed in the url.
 	public function show()
 	{
 		if ($this->model()->get_id_post($_GET['post'])) {
+			$show_comments = $this->show_comments();
 			$showtab = $this->model()->get_id_post($_GET['post'])[0];
-			$this->view('posts', 'show', $showtab["title"], compact("showtab"));
+			$this->view('posts', 'show', $showtab["title"], compact("showtab", "show_comments"));
 		}
 	}
 }
