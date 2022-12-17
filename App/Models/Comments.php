@@ -9,7 +9,7 @@ class Comments extends Model
 {
     protected static $table = 'comments';
     protected static $primary = 'id';
-    //Deletes the comments of a user passed in parameter. 
+    //Deletes the comments of a user passed in parameter.
     public function delete_comment_of_user(int $user)
     {
         return $this->request('delete FROM comments WHERE user_id = :user', [':user' => $user], PDO::FETCH_ASSOC);
