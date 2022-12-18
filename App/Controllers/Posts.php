@@ -59,7 +59,7 @@ class Posts extends Controller
 	//Displays all comments related to an article.
 	public function show_comments()
 	{
-		return $this->model("comments")->get_comment_approve_by_post(1);
+		return $this->model("comments")->get_comment_approve_by_post($_GET['post']);
 	}
 
 	//Displays the article with the parameter passed in the url.
