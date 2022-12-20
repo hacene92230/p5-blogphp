@@ -8,10 +8,7 @@
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-  <!-- Font Awesome CSS -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-+LcEbO+ldb8cnx1aXZQ2N/K0A2WzJ6UfYYdAi+aN/P5Wgx5xE1HX0BqOvM8WUhwgMxdD6oGK6fvL8WK1/CxG2XA==" crossorigin="anonymous" />
-  
-  <!-- Optional JavaScript -->
+<!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -23,45 +20,36 @@
 <link href="style.css" rel="stylesheet">
     </head>
 <body>
-<header class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="index.php">Accueil</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <?php if(isset($_SESSION['utilisateurs'])) : ?>
-          <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-user"></i> <?= $_SESSION['utilisateurs']['firstname'] ?>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="index.php?page=users&action=edit">
-              <i class="fas fa-edit"></i> Mon profil
-            </a>
-            <?php if($_SESSION['utilisateurs']['profil'] == 1) : ?>
-              <a class="dropdown-item" href="index.php?page=admin&action=home">
-                <i class="fas fa-cog"></i> Administration
-              </a>
-            <?php endif; ?>
-            <a class="dropdown-item" href="index.php?page=users&action=logout">
-              <i class="fas fa-sign-out-alt"></i> Se déconnecté
-            </a>
-          </div>
-        <?php else : ?>
-          <a class="nav-link text-white" href="index.php?page=users&action=login">
-            <i class="fas fa-sign-in-alt"></i> Connexion
-          </a>
-          <a class="nav-link text-white" href="index.php?page=users&action=register">
-            <i class="fas fa-user-plus"></i> Inscription
-          </a>
-        <?php endif; ?>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Rechercher" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">
-        <i class="fas fa-search"></i    
-      </form>
-  </div>
+<header>
+<p>HACENE SAHRAOUI</p>
+<p><a href="index.php">Accueil</a></p>
+<?php
+if(isset($_SESSION['utilisateurs']))
+{
+?>
+<li role="profil" class="nav nav-tabs" class="dropdown">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> <?= $_SESSION['utilisateurs']['firstname'] ?> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+<li><a href="index.php?page=users&action=edit">Mon profil</a></li>
+
+<?php
+if($_SESSION['utilisateurs']['profil'] == 1)
+{ ?>
+<li><a href="index.php?page=admin&action=home">Administration</a></li>
+<?php
+}
+?>
+<li><a href="index.php?page=users&action=logout">Se déconnecté</a></li>
+      </ul>
+<?php
+}
+else
+{
+	?>
+<a href="index.php?page=users&action=login">Connexion</a>
+<a href="index.php?page=users&action=register">Inscription</a>
+<?php
+}
+?>
 </header>
