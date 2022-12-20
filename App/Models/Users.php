@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use System\Coeur\Models\Model;
-use PDO;
+//use PDO;
 
 class Users extends Model
 {

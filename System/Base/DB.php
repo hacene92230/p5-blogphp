@@ -1,3 +1,5 @@
+<?php
+
 namespace System\Base;
 
 use PDO;
@@ -5,7 +7,7 @@ use PDOException;
 
 class DB
 {
-    private const DATABASE_CONFIG_FILE = __DIR__ . '/config/database.config.php';
+    private const DATABASE_CONFIG_FILE = __DIR__ . '/../config/database.config.php';
 
     /**
      * Classe utilisée pour obtenir une instance de PDO.
@@ -41,9 +43,4 @@ class DB
 
         return $pdo;
     }
-}
-
-// Classe exception personnalisée pour les erreurs de connexion à la base de données
-class DatabaseConnectionException extends PDOException
-{
 }
