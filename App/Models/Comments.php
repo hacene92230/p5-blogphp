@@ -17,14 +17,17 @@ class Comments extends Model
      * @return bool
      * @throws PDOException Si la requête SQL échoue
      */
-    public function delete_comments_by_user(int $user): bool
+    public function deleteCommentsOfUser(int $user): bool
     {
         try {
-            return $this->request('DELETE FROM comments WHERE user_id = :user', [':user' => $user], PDO::FETCH_ASSOC);
+            $result = $this->request('DELETE FROM comments WHERE user_id = :user', [':user' => $user], PDO::FETCH_ASSOC);
+            return $result !== false;
         } catch (PDOException $e) {
             throw $e;
         }
     }
+
+
 
     /**
      * Récupère le prénom d'un utilisateur qui a soumis un commentaire

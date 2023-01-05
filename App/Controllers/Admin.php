@@ -6,56 +6,64 @@ use System\Coeur\Controllers\Controller;
 
 class Admin extends Controller
 {
-	//Manages the home of the administration.
+	/**
+	 * Gère l'accueil de l'administration.
+	 */
 	public function home()
 	{
-		//we retrieve the list of all users.
-		$users = $this->model('users');
-		$liste_user = $users->get_all();
-		$this->view('admin', 'home', 'Administration', compact('liste_user'));
+		// Récupère la liste de tous les utilisateurs.
+		$usersModel = $this->model('users');
+		$listUsers = $usersModel->get_all();
+		$this->view('admin', 'home', 'Administration', compact('listUsers'));
 	}
 
-	//Collect all comments.
+	/**
+	 * Affiche la liste de tous les commentaires.
+	 */
 	public function comment_show()
 	{
-		//We take all the comments to store them in a table.
-		$comments = $this->model("comments")->get_all();
-		foreach ($comments as $valeur) {
-			$valeur->user_comment = $this->model("comments")->getFirstnameByCommentUser($valeur->user_id);
+		// Récupère tous les commentaires et ajoute le nom de l'auteur de chaque commentaire.
+		$commentsModel = $this->model("comments");
+		$comments = $commentsModel->get_all();
+		foreach ($comments as $comment) {
+			$comment->user_comment = $commentsModel->getFirstnameByCommentUser($comment->user_id);
 		}
 		$this->view('comments', "management", 'Liste des commentaires.', compact("comments"));
 	}
 
-	//allows you to validate comments that are not yet validated.
+	/**
+	 * Permet de valider les commentaires qui ne sont pas encore validés.
+	 */
 	public function comment_validate()
 	{
-		$choix["approval"] = 1;
-		$this->model("comments")->update($_GET['comment'], $choix);
-		header("location: index.php?page=admin&action=home");
-		$_SESSION['message'][] = "Le commentaire à bien été valider";
+		if (isset($_GET['comment'])) {
+			$data = ['approval' => 1];
+			$this->model("comments")->update((int) $_GET['comment'], $data);
+			header("location: index.php?page=admin&action=home");
+			$_SESSION['message'][] = "Le commentaire a bien été validé";
+		}
 	}
 
-	public function comment_no_validate()
+	public function commentNoValidate(): void
 	{
-		$choix["approval"] = 2;
-		$this->model("comments")->update($_GET['comment'], $choix);
-		header("location: index.php?page=admin&action=home");
-		$_SESSION['message'][] = "Le commentaire à bien été refuser.";
+		$choix = ['approval' => 2];
+		$this->model('comments')->update((int) $_GET['comment'], $choix);
+		header('location: index.php?page=admin&action=home');
+		$_SESSION['message'][] = 'Le commentaire à bien été refusé.';
 	}
 
-	public function comment_delete()
+	public function commentDelete(): void
 	{
-		$this->model("comments")->delete($_GET["comment"]);
-		header("location: index.php?page=admin&action=home");
-		$_SESSION['message'][] = "Le commentaire à bien été supprimer";
+		$this->model('comments')->delete((int) $_GET['comment']);
+		header('location: index.php?page=admin&action=home');
+		$_SESSION['message'][] = 'Le commentaire à bien été supprimé';
 	}
 
-	public function user_remove()
+	public function userRemove(): void
 	{
-		$this->model("comments")->delete_comment_of_user($_GET["user"]);
-		$this->model("users")->delete($_GET['user']);
-
-		header("location: index.php?page=admin&action=home");
-		$_SESSION['message'][] = "Le compte à bien été supprimer.";
+		$this->model('users')->delete((int) $_GET['user']);
+		$this->model('comments')->deleteCommentsOfUser($_GET['user']);
+		header('location: index.php?page=admin&action=home');
+		$_SESSION['message'][] = 'Le compte à bien été supprimé.';
 	}
 }

@@ -11,11 +11,11 @@
 	</thead>
 	<tbody>
 		<?php
-		foreach ($liste_user as $utilisateurs) {
+		foreach ($listUsers as $utilisateurs) {
 			echo "<tr>";
 			echo "<td><h2>$utilisateurs->firstname</h2></td>";
 			echo "<td>$utilisateurs->email</td>";
-			echo "<td><a href='index.php?page=admin&action=user_remove&user=$utilisateurs->id'>Supprimer le compte</a></td>";
+			echo "<td><a href='index.php?page=admin&action=userRemove&user=$utilisateurs->id'>Supprimer le compte</a></td>";
 			echo "</tr>";
 		}
 		?>

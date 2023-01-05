@@ -121,7 +121,7 @@ class Users extends Controller
 		$userModel->update($_SESSION['utilisateurs']['id'], $_POST);
 
 		// Met à jour les informations de l'utilisateur en session et affiche un message de confirmation.
-		$_SESSION['utilisateurs'] = $userModel->findUser($_POST['email'])[0];
+		$_SESSION['utilisateurs'] = $userModel->findByEmail($_POST['email'])[0];
 		$_SESSION['message'][] = "La modification de ton profil s'est bien déroulée";
 		header("location: index.php?page=users&action=edit");
 		exit;
@@ -141,7 +141,6 @@ class Users extends Controller
 		session_destroy();
 		header("location: index.php");
 	}
-
 	/**
 	 * Supprime le compte de l'utilisateur connecté.
 	 *
@@ -152,8 +151,9 @@ class Users extends Controller
 		if (!isset($_POST['supprimer'])) {
 			return;
 		}
-
+		$commentModel = $this->model("comments");
 		$userModel = $this->model();
+		$commentModel->delete($_SESSION['utilisateurs']['id']);
 		$userModel->delete($_SESSION['utilisateurs']['id']);
 		$_SESSION['message'][] = "La suppression de votre compte à bien été prise en compte, celle-ci à un effet immédiat";
 		header("Location: index.php");
