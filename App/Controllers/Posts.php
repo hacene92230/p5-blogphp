@@ -1,74 +1,77 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controllers;
 
 use System\Coeur\Controllers\Controller;
 
 class Posts extends Controller
 {
-	//function to create a new article, no parameters are needed.
-	public function new()
+	public function new(): void
 	{
 		if (isset($_POST['new'])) {
-			//For convenience, we extract all the variables from the array post
-			extract($_POST);
-			$tabuser = array(
+			$title = $_POST['title'] ?? '';
+			$content = $_POST['content'] ?? '';
+
+			$tabuser = [
 				"title" => $title,
-				"content" => $content
-			);
-			//once the data is ready to be sent, we call the article model and then we save our data in the database.
+				"content" => $content,
+			];
+
 			$this->model()->register($tabuser);
-			$_SESSION['message'][] = "l'article vient d'être créer";
+			$_SESSION['message'][] = "L'article vient d'être créé";
 		}
+
 		$this->view('posts', 'new', 'Création d\'un nouvel article');
 	}
 
-	//Allows you to delete an item.
-	public function delete()
+	public function delete(): void
 	{
-		//we retrieve all the articles already written in order to be able to store them in a table to send them to our view.
 		$tabpost = $this->model()->get_all();
+
 		if (isset($_POST['delete'])) {
-			extract($_POST);
+			$delete = $_POST['delete'] ?? '';
 			$this->model()->delete($delete);
-			$_SESSION['message'][] = "l'article vient d'être supprimer";
+			$_SESSION['message'][] = "L'article vient d'être supprimé";
 		}
+
 		$this->view('posts', 'delete', 'Supprimer un articles', compact("tabpost"));
 	}
 
-	//allows you to edit an article
-	public function edit()
+	public function edit(): void
 	{
 		if (isset($_POST['view_all'])) {
-			//we retrieve the article that will have been chosen in the drop-down list then we display the view with the identifier in question.
-			$look = $this->model()->get_id_post($_POST['view_all']);
+			$viewAll = $_POST['view_all'] ?? '';
+			$look = $this->model()->get_id_post($viewAll);
 			$this->view('posts', 'edit', 'éditer un articles', compact("look"));
 		} elseif (isset($_POST['edit'])) {
-			//we remove edit from the post table because otherwise the field would not exist because we will save the post table directly in the database.
-			unset($_POST['edit']);
-			$this->model()->update($_POST['id'], $_POST);
+			$id = $_POST['id'] ?? '';
+			$data = $_POST;
+			unset($data['edit']);
+			$this->model()->update($id, $data);
 			header("location: index.php?page=posts&action=edit");
-			$_SESSION['message'][] = "L'article à bien été mis à jours";
+			$_SESSION['message'][] = "L'article à bien été mis à jour";
 		} else {
-			//we collect all the items. that we stoke in a table to make them visible.a
-			$view_all = $this->model()->get_all();
-			$this->view('posts', 'edit', 'éditer un articles', compact("view_all"));
+			$viewAll = $this->model()->get_all();
+			$this->view('posts', 'edit', 'éditer un articles', compact("viewAll"));
 		}
 	}
 
-	//Displays all comments related to an article.
-	public function show_comments()
+	public function show_comments(): array
 	{
-		return $this->model("comments")->get_comment_approve_by_post($_GET['post']);
+		$postId = intval($_GET['post']) ?? '';
+		return $this->model("comments")->getApproved_CommentsByPost($postId);
 	}
 
-	//Displays the article with the parameter passed in the url.
-	public function show()
+	public function show(): void
 	{
-		if ($this->model()->get_id_post($_GET['post'])) {
-			$show_comments = $this->show_comments();
-			$showtab = $this->model()->get_id_post($_GET['post'])[0];
-			$this->view('posts', 'show', $showtab["title"], compact("showtab", "show_comments"));
+		$postId = intval($_GET['post']) ?? '';
+		$showTab = $this->model()->getPostById($postId)[0] ?? [];
+
+		if ($showTab) {
+			$showComments = $this->show_comments();
+			$this->view('posts', 'show', $showTab["title"], compact("showTab", "showComments"));
 		}
 	}
 }

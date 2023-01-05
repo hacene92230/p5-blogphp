@@ -8,7 +8,7 @@ class Home extends Controller
 {
 	public function home()
 	{
-		$tabpost = $this->model("posts")->get_all();
+		$tabpost = $this->model("Posts")->get_all();
 		$this->view('home', 'home', 'Accueil', compact("tabpost"));
 	}
 

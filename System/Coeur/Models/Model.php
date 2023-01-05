@@ -127,6 +127,42 @@ abstract class Model
     }
 
     /**
+     * Exécute une requête SQL avec des paramètres.
+     *
+     * @param string $sql Requête SQL à exécuter.
+     * @param array $args Paramètres à lier à la requête.
+     * @return bool True si la requête a été exécutée avec succès, false sinon.
+     */
+    public function execute(string $sql, array $args): bool
+    {
+        // Récupère une instance de PDO.
+        $pdo = DB::get();
+
+        // Prépare la requête SQL.
+        $stmt = $pdo->prepare($sql);
+
+        // Lie chaque élément du tableau $args à un marqueur de paramètre dans la requête.
+        foreach ($args as $key => $value) {
+            // Détermine le type de données du paramètre.
+            $type = PDO::PARAM_STR;
+            if (is_int($value)) {
+                $type = PDO::PARAM_INT;
+            } elseif (is_bool($value)) {
+                $type = PDO::PARAM_BOOL;
+            } elseif (is_null($value)) {
+                $type = PDO::PARAM_NULL;
+            }
+
+            // Lie le paramètre à la requête.
+            $stmt->bindValue(':' . $key, $value, $type);
+        }
+
+        // Exécute la requête et retourne le résultat.
+        return $stmt->execute();
+    }
+
+
+    /**
      * Exécute une requête de sélection avec les paramètres donnés
      *
      * @param string $sql Requête de sélection à exécuter
