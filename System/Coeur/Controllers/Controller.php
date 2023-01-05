@@ -5,23 +5,20 @@ namespace System\Coeur\Controllers;
 use Exception;
 use System\Coeur\Models\Model;
 use System\Coeur\Views\View;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 
 class Controller
 {
     /**
+     * Instancie un model.
      *
-     * Instancie un model
-     * 
-     * Si le parametre de la fonction est vide 
-     * le nom du controller sera utiliser automatiquement comme 
-     * nom de model mais il devras exister dans le dossier model  
+     * Si le paramètre de la fonction est vide, le nom du controller sera utilisé automatiquement comme nom de modèle,
+     * mais il devra exister dans le dossier model.
      *
-     * @param string $model
+     * @param string $model Nom du modèle à instancier
      *
-     * @return Model
-     * 
+     * @throws Exception Si le modèle demandé n'existe pas ou n'est pas une instance de la classe Model
+     *
+     * @return Model Instance du modèle demandé
      */
     public function model(string $model = ''): Model
     {
@@ -41,47 +38,19 @@ class Controller
         }
         return new $model();
     }
+
     /**
-     * affiche une view
+     * Affiche une vue.
      *
-     * @param string $view
-     * @param string $directory
-     * @param string $title
-     * @param string $description
-     * @param array $args
+     * @param string $directory Répertoire contenant la vue
+     * @param string $view Nom de la vue à afficher
+     * @param string $title Titre de la vue
+     * @param array $args Arguments à passer à la vue
+     *
      * @return void
      */
     public function view(string $directory, string $view, string $title, array $args = []): void
     {
         echo (new View($directory, $view, $title, $args))->create();
-    }
-
-
-    public function mail($sujet, $msg)
-    {
-        $mail = new PHPMailer(true);
-        try {
-            $mail->isSMTP();
-            $mail->CharSet = 'utf-8';
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'hacenesahraoui.paris@gmail.com';
-            $mail->Password   = "pukadnxverivplbj";
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 25;
-            $mail->setFrom('hacenesahraoui.paris@gmail.com', 'Contact culture du savoir');
-            $mail->addAddress('hacenesahraoui.paris@gmail.com');
-            $mail->isHTML(true);
-            $mail->Subject = $sujet;
-            $mail->Body = $msg;
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        }
-    }
-
-    public function search($value): array
-    {
-        return  $this->model()->search_all($value);
     }
 }
