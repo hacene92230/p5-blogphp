@@ -41,12 +41,13 @@ class Posts extends Controller
 
 	public function edit(): void
 	{
-		if (isset($_POST['view_all'])) {
-			$viewAll = $_POST['view_all'] ?? '';
-			$look = $this->model()->get_id_post($viewAll);
+		if (isset($_POST['viewAll'])) {
+			$viewAll = intval($_POST['viewAll']) ?? '';
+
+			$look = $this->model()->getPostById($viewAll);
 			$this->view('posts', 'edit', 'éditer un articles', compact("look"));
 		} elseif (isset($_POST['edit'])) {
-			$id = $_POST['id'] ?? '';
+			$id = intval($_POST['id']) ?? '';
 			$data = $_POST;
 			unset($data['edit']);
 			$this->model()->update($id, $data);

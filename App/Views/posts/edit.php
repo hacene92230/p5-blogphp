@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['view_all'])) {
+if (isset($_POST['viewAll'])) {
 ?>
     <form method="post" action="">
         <input id="id" name="id" type="hidden" value="<?= $look[0]['id'] ?>" />
@@ -14,14 +14,14 @@ if (isset($_POST['view_all'])) {
         <input class="btn btn-success" type="submit" name="edit" value="Modifier cet article" />
     </form>
 <?php
-} else if (!isset($_POST['view_all'])) {
+} else if (!isset($_POST['viewAll'])) {
 ?>
     <h2>Choisir un article à éditer</h2>
     <form method="post" action="    ">
         <label for="delete">Quel article éditer</label>
-        <select name="view_all">
+        <select name="viewAll">
             <?php
-            foreach ($view_all as $cle) {
+            foreach ($viewAll as $cle) {
                 echo '<option value="' . $cle->id . '">' . $cle->title . '</option>';
             }
             ?>

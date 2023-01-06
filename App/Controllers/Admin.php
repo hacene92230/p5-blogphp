@@ -9,7 +9,7 @@ class Admin extends Controller
 	/**
 	 * Gère l'accueil de l'administration.
 	 */
-	public function home()
+	public function home() : void
 	{
 		// Récupère la liste de tous les utilisateurs.
 		$usersModel = $this->model('users');
@@ -20,7 +20,7 @@ class Admin extends Controller
 	/**
 	 * Affiche la liste de tous les commentaires.
 	 */
-	public function comment_show()
+	public function comment_show(): void
 	{
 		// Récupère tous les commentaires et ajoute le nom de l'auteur de chaque commentaire.
 		$commentsModel = $this->model("comments");
@@ -34,7 +34,7 @@ class Admin extends Controller
 	/**
 	 * Permet de valider les commentaires qui ne sont pas encore validés.
 	 */
-	public function comment_validate()
+	public function comment_validate() : void
 	{
 		if (isset($_GET['comment'])) {
 			$data = ['approval' => 1];
@@ -44,6 +44,9 @@ class Admin extends Controller
 		}
 	}
 
+	/**
+	 * Permet de ne pas valider les commentaires.
+	 */
 	public function commentNoValidate(): void
 	{
 		$choix = ['approval' => 2];
@@ -52,6 +55,9 @@ class Admin extends Controller
 		$_SESSION['message'][] = 'Le commentaire à bien été refusé.';
 	}
 
+	/**
+	 * Permet de supprimer les commentaires.
+	 */
 	public function commentDelete(): void
 	{
 		$this->model('comments')->delete((int) $_GET['comment']);
@@ -59,6 +65,9 @@ class Admin extends Controller
 		$_SESSION['message'][] = 'Le commentaire à bien été supprimé';
 	}
 
+	/**
+	 * Permet de supprimer un utilisateur et tout ces commentaires associé.
+	 */
 	public function userRemove(): void
 	{
 		$this->model('users')->delete((int) $_GET['user']);

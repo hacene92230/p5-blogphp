@@ -17,7 +17,7 @@
                 echo "<td>" . $show->user_comment[0]['firstname'] . "</td>";
                 echo "<td>" . $show->content . "</td>";
                 echo "<td>" . $show->approval . "</td>";
-                echo "<td><a href='index.php?page=admin&action=comment_no_validate&comment=" . $show->id . "'>Refuser le commentaires</a></td>";
+                echo "<td><a href='index.php?page=admin&action=commentNoValidate&comment=" . $show->id . "'>Refuser le commentaires</a></td>";
                 echo "</tr>";
             }
         }
@@ -45,7 +45,7 @@
                 echo "<td>" . $show->content . "</td>";
                 echo "<td>" . $show->approval . "</td>";
                 echo "<td><a href='index.php?page=admin&action=comment_validate&comment=" . $show->id . "'>Valider le commentaire</a></td>";
-                echo "<td><a href='index.php?page=admin&action=comment_no_validate&comment=" . $show->id . "'>Refuser le commentaires</a></td>";
+                echo "<td><a href='index.php?page=admin&action=commentNoValidate&comment=" . $show->id . "'>Refuser le commentaires</a></td>";
                 echo "</tr>";
             }
         } ?>
@@ -72,7 +72,7 @@
                 echo "<td>" . $show->content . "</td>";
                 echo "<td>" . $show->approval . "</td>";
                 echo "<td><a href='index.php?page=admin&action=comment_validate&comment=" . $show->id . "'>Valider le commentaire</a></td>";
-                echo "<td><a href='index.php?page=admin&action=comment_delete&comment=" . $show->id . "'>Supprimer le commentaires</a></td>";
+                echo "<td><a href='index.php?page=admin&action=commentDelete&comment=" . $show->id . "'>Supprimer le commentaires</a></td>";
                 echo "</tr>";
             }
         } ?>
